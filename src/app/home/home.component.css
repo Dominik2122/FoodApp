@@ -1,0 +1,21 @@
+h1,
+h3 {
+  font-family: "Abril Fatface", cursive;
+  color: #332d2d;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+p {
+  font-family: "PT Sans", sans-serif;
+}
+
+.main-text {
+    margin-top: 5%
+}

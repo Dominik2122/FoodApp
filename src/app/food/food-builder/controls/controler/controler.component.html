@@ -1,0 +1,4 @@
+<button class="button" [ngClass]='{"is-success": active, "is-danger":!active }' (click)='ingredientOnClick(ingredientName)'>
+    {{ingredientName}} | {{ingredientPrice | number : '1.2-2'}}$
+</button>
+

@@ -1,0 +1,37 @@
+<div class="box">
+  <div class="columns is-mobile is-centered is-multiline">
+    <div
+      class="column is-half-mobile is-4-tablet"
+      *ngFor="let name of names; let i = index"
+    >
+      <app-controler
+        [ingredientName]="name"
+        [active]="newNames[name].active"
+        [ingredientPrice]="newNames[name].price"
+        (ingredientChanged)="changeIngredients(name)"
+        (showModal)='changeModal()'
+      ></app-controler>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-template [ngIf]='modalStatus'>
+<div class="modal is-active">
+  <div class="modal-background" (click)='changeModal()'></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Ups...</p>
+      <button class="delete" aria-label="close" (click)='changeModal()'>x</button>
+    </header>
+    <section class="modal-card-body">
+      Are you sure??? Cause, you know, pizza without cheese is... a bit sad :( 
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)='removeCheese()'>Yes</button>
+      <button class="button" (click)='changeModal()'>Thanks for saving my life</button>
+    </footer>
+  </div>
+</div>
+</ng-template>
