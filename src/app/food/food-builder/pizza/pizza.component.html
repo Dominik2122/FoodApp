@@ -1,19 +1,20 @@
 <div class="pizza">
-    <app-ingredients [ingredients]='ingredients'></app-ingredients>
+  <app-ingredients [ingredients]="ingredients"></app-ingredients>
 </div>
 <div class="columns is-mobile is-centered">
-    <div class="column is-centered">
-        <button class="button is-success">
-            Let's go!
-        </button>
-    </div>
-    <div class="column is-centered">
-        <button class="button is-danger">
-            Let's go!
-        </button>
-    </div>
+  <div class="column is-centered">
+    <a routerLink="/food/checkout">
+      <button class="button is-success" >Let's go!</button>
+    </a>
+  </div>
+  <div class="column is-centered">
+    <a routerLink="/">
+      <button class="button is-danger">Go back</button>
+    </a>
+  </div>
 </div>
 
-
-
 <app-controls></app-controls>
+<div class="price">
+    <h1>Cost: {{price | number:'1.2-2'}}$</h1>
+</div>

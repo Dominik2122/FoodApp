@@ -21,8 +21,12 @@ export class ControlerComponent {
       this.showModal.emit()
     } else{ 
       this.ingredientChanged.emit(name)
+      if (this.active == true){
+        this.foodService.priceUpdate(-this.ingredientPrice)
+      } else {
+        this.foodService.priceUpdate(this.ingredientPrice)
+      }
       this.active = !this.active
-      this.foodService.priceUpdate(this.ingredientPrice)
     }
   }
 

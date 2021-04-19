@@ -10,6 +10,7 @@ import { ControlerComponent } from './food-builder/controls/controler/controler.
 import { FoodDirective } from './food.directive';
 import { SushiComponent } from './food-builder/sushi/sushi.component';
 import { NotFoundComponent } from './food-builder/not-found/not-found.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
@@ -22,7 +23,8 @@ import { NotFoundComponent } from './food-builder/not-found/not-found.component'
     ControlerComponent,
     FoodDirective,
     SushiComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,

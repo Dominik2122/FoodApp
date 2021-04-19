@@ -9,7 +9,18 @@
     .pizza {
         height: 300px;
         width: 300px;
+        margin-top: -30px;
     }
+}
+
+.is-success{
+    position: absolute;
+        left:65%;
+}
+
+.is-danger{
+    position: relative;
+        left:-90%
 }
 
 @media (min-width: 600px) {
@@ -19,7 +30,8 @@
         clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
         position: absolute;
         top: 31%;
-        left:70%
+        left:70%;
+        
     }
 
     .is-danger{
@@ -28,6 +40,24 @@
         clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
         position: absolute;
         top: 31%;
-        left:23%
+        left:24%
+    }
+}
+
+.price {
+    text-align:center;
+    height: 70px;
+    width: 20%;
+    margin:auto;
+    padding-bottom:5px;
+    font-size: 40px;
+    background-color: #df8328
+}
+
+@media (max-width: 600px) {
+    .price {
+        width: 60%;
+        height: 50px;
+        font-size: 30px;
     }
 }

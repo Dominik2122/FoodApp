@@ -4,6 +4,7 @@ import { FoodDirective } from '../food.directive';
 import { SushiComponent } from './sushi/sushi.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { FoodService } from '../food.service';
 
 
 const foods = {
@@ -24,13 +25,14 @@ export class FoodBuilderComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private viewContainerRef: ViewContainerRef
+    private foodService:FoodService
 
     ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => { 
       this.foodName = params.foodName
+      this.foodService.prevFoodName = this.foodName
     })
 
     if (foods[this.foodName]){
@@ -41,6 +43,6 @@ export class FoodBuilderComponent implements OnInit {
       const componentRef = this.foodComponent.viewContainerRef.createComponent(componentFactory) 
     }
     
-    
+    this.foodService.getUrl()
   }
 }

@@ -57,6 +57,7 @@ export class ControlsComponent implements OnInit {
   removeCheese(){
     this.ingredients['cheese'].amount = 0
     this.foodService.ingredientsUpdated.next(this.ingredients)
+    this.foodService.priceUpdate(-this.ingredients['cheese'].price)
     this.changeModal();
   }
 

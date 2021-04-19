@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable} from '@angular/core';
-import {withLatestFrom} from 'rxjs/operators'
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter, tap } from 'rxjs/operators';
 import { Pizza } from './food-builder/pizza/pizza';
 
 @Injectable({
@@ -17,11 +18,34 @@ export class FoodService {
       onions: {amount:0, price:0.99},
     },
   }
+  previousUrl:string
+  currentUrl:string
+  prevFoodName:string
+  constructor(private router: Router,
+    private route:ActivatedRoute) { }
   price = new EventEmitter<number>();
-  constructor() { }
+  currentPrice=0
+
+
+  ngOnInit(): void {
+
+  }
+
+
+ 
+  
+  getUrl(){
+    this.previousUrl = this.router.url
+    this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationEnd)
+      )
+    .subscribe((event:NavigationEnd) => {
+      this.currentUrl = event.url
+    })
+  }
 
   getIngredients(food:string){
-    this.price.next(5)
     return this.ingredients[food]
   }
 
@@ -31,10 +55,8 @@ export class FoodService {
   }
 
   priceUpdate(price:number){
-    this.price
-      .pipe(
-        withLatestFrom(x => console.log(x))
-      )
+    this.currentPrice += price
+    this.price.emit(this.currentPrice)
   }
 
 
