@@ -7,7 +7,8 @@ const routes: Routes = [
   {
     path: 'food',
     loadChildren: () => import('./food/food.module').then(mod => mod.FoodModule)
-  }
+  },
+  
 ];
 
 @NgModule({

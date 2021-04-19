@@ -1,0 +1,30 @@
+.label {
+    margin-top: 10px
+}
+
+.field, .button {
+    width: 70%;
+    margin-left: 20%;
+    margin-top:20px
+}
+
+
+
+
+.control {
+    border: 10px solid #df8328;
+    border-radius: 10px
+}
+
+@media (max-width: 600px) {
+    .field {
+        width: 90%;
+        margin-left: 5%
+
+    }
+
+    .button {
+        width: 90%;
+        margin-left: 5%
+    }
+}

@@ -2,11 +2,34 @@
     <div class="container">
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item"> Home </a>
-          <a class="navbar-item"> Documentation </a>
+          <a class="navbar-item" routerLink='/'> Home </a>
+          
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
+            <div class="navbar-item has-dropdown is-active ">
+  
+                <a class="navbar-link ">
+                  Create meal
+                </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item" routerLink='/food/pizza'>
+                  Pizza
+                </a>
+                <a class="navbar-item disabled">
+                  Sushi
+                </a>
+                <a class="navbar-item disabled">
+                  Burger
+                </a>
+              </div>
+            </div></div>
+            <div class="navbar-item">
+            <a class="navbar-item"> Login </a>
+          </div>
+          <div class="navbar-item">
+            <a class="navbar-item"> Sign up </a>
           </div>
         </div>
       </div>

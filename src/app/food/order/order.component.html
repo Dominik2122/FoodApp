@@ -1,0 +1,41 @@
+
+<div class="container" >
+<form  [formGroup]='deliveryForm' (ngSubmit)='abcd()'>
+    <div class="field ">
+        <label class='label' for="">Name</label>
+        <p class="control has-icons-left">
+            <input class='input' type='text' formControlName='name' placeholder='Your name'>
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+        </p>
+        
+    
+        <label class='label' for="">Email</label>
+        <p class="control has-icons-left">
+            <input class='input' type='email' formControlName='email' placeholder='Your email'>
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </p>
+    
+        <label class='label' for="">Phone Nr</label>
+        <p class="control has-icons-left">
+            <input class='input' type='number' formControlName='phone' placeholder='Your phone number'>
+            <span class="icon is-small is-left">
+                <i class="fas fa-phone"></i>
+            </span>
+        </p>
+    
+        <label class='label' for="">Address</label>
+        <p class="control has-icons-left">
+            <input class='input' type='text' formControlName='address' placeholder='Your address'>
+            <span class="icon is-small is-left">
+                <i class="fas fa-home"></i>
+            </span>
+        </p>
+    </div>
+    <button type='submit' class="button is-success">Order!</button>
+</form>
+
+</div>

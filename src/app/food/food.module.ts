@@ -11,6 +11,8 @@ import { FoodDirective } from './food.directive';
 import { SushiComponent } from './food-builder/sushi/sushi.component';
 import { NotFoundComponent } from './food-builder/not-found/not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderComponent } from './order/order.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -24,11 +26,13 @@ import { CheckoutComponent } from './checkout/checkout.component';
     FoodDirective,
     SushiComponent,
     NotFoundComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,
-    FoodRoutingModule
+    FoodRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class FoodModule { }
