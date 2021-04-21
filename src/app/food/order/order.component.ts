@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Pizza } from '../food-builder/pizza/pizza';
+import { FoodService } from '../food.service';
+import { Order } from './order';
+
+
+
+
 
 @Component({
   selector: 'app-order',
@@ -28,13 +35,26 @@ export class OrderComponent implements OnInit {
   modalStatus = false
 
 
- constructor() { }
+ constructor(private foodService:FoodService) { }
 
   ngOnInit(): void {
   }
 
 
-  abcd() {
-    console.log(this.deliveryForm.value)
-  }
+  sendOrder():any {
+    const {name, address, email, phone } = this.deliveryForm.value
+    const pizza = this.foodService.getIngredients('pizza')
+    const value = this.foodService.currentPrice
+    const order = {
+      user: {
+        username: name,
+        address: address,
+        email: email,
+        phone: phone
+      },
+      food: pizza,
+      value: value
+    }
+    this.foodService.sendOrderToServer(order).subscribe(res => console.log(res))
+}
 }
