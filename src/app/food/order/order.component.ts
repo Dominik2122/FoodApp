@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Pizza } from '../food-builder/pizza/pizza';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import { FoodService } from '../food.service';
-import { Order } from './order';
 
 
 
@@ -31,18 +33,25 @@ export class OrderComponent implements OnInit {
       Validators.maxLength(9)
     ])
   })
-
   modalStatus = false
+  error: string;
+  isLoading = true
+  success: boolean;
+  timer = 7
 
-
- constructor(private foodService:FoodService) { }
+  constructor(
+    private foodService: FoodService,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
 
 
-  sendOrder():any {
-    const {name, address, email, phone } = this.deliveryForm.value
+  sendOrder() {
+    this.isLoading = true
+    const { name, address, email, phone } = this.deliveryForm.value
     const pizza = this.foodService.getIngredients('pizza')
     const value = this.foodService.currentPrice
     const order = {
@@ -55,6 +64,21 @@ export class OrderComponent implements OnInit {
       food: pizza,
       value: value
     }
-    this.foodService.sendOrderToServer(order).subscribe(res => console.log(res))
-}
+    this.foodService.sendOrderToServer(order)
+      .pipe(catchError((err) => {
+        this.error = err.message
+        return of([])
+      }))
+      .subscribe((res) => {
+        console.log(res)
+        this.success = true     
+    })
+    setInterval(()=>{
+      this.timer
+    }, 1000)
+    setTimeout(() =>{
+      this.success = false
+      this.router.navigate(['/'])
+    }, 7000) 
+  }
 }

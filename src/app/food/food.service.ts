@@ -12,7 +12,6 @@ import { Order } from './order/order';
 })
 export class FoodService {
   rootUrl = 'https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/'
-  serverKey = 'AAAAFN4ECqA:APA91bGerNOLGk625lebP2PSFtdaFf-Ac3658ij8kx40dOXLKWs1OEHJ_f9JMIGZcE_0_cwxRF7dNns5fW-XdMMBMAwF6ChW7YTIBl-cAEbIlRKu_7z8gB8Gtu0RUuTJDRfVgCr_6gmt'
   ingredientsUpdated = new EventEmitter<{}>()
   ingredients = {
     'pizza': {

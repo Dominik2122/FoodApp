@@ -13,6 +13,7 @@ import { NotFoundComponent } from './food-builder/not-found/not-found.component'
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SuccessComponent } from './order/success/success.component';
 
 
 
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SushiComponent,
     NotFoundComponent,
     CheckoutComponent,
-    OrderComponent
+    OrderComponent,
+    SuccessComponent
   ],
   imports: [
     CommonModule,

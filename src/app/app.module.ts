@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SymbolsComponent } from './home/symbols/symbols.component';
 import { NavComponent } from './nav/nav.component';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { NavComponent } from './nav/nav.component';
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     AppRoutingModule,
     HttpClientModule
   ],

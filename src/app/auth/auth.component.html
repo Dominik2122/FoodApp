@@ -1,0 +1,55 @@
+<div class="container">
+    <div class='loading' *ngIf='isLoading'></div>
+    <form #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!isLoading'>
+      <div class="field">
+        <label for="email" class='label'>Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="input"
+          ngModel
+          required
+          email
+        />
+
+      <div class="form-group">
+        <label for="password" class='label'>Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="input"
+          ngModel
+          required
+          minlength="6"
+        />
+      </div>
+      <ng-template [ngIf]='!isLoginMode'>
+        <div class="">
+        <label for="password2" class='label'>Confirm Password</label>
+        <input
+          type="password"
+          name="password2"
+          id="password2"
+          class="input"
+          ngModel
+          required
+          minlength="6"
+        />
+      </div>
+      
+      </ng-template>
+   
+    </div>
+      <div class="field" style='margin-top:20px'>
+        <button class="button is-primary" type="submit" [disabled]='!authForm.valid'>
+          {{ isLoginMode ? "Login" : "Sing Up" }}
+        </button> |
+        <a (click)="onSwitchMode()">
+          {{ isLoginMode ? "Don't have an account? Create one!" : 'Come back to login' }}
+        </a>
+      </div>
+    </form>
+  
+</div>

@@ -25,12 +25,23 @@
                 </a>
               </div>
             </div></div>
+            <ng-container  *ngIf='!userLogged; else userProfile'>
             <div class="navbar-item">
-            <a class="navbar-item"> Login </a>
+            <a class="navbar-item" (click)='authSection=true; loginMode=true'> Login </a>
+
           </div>
           <div class="navbar-item">
-            <a class="navbar-item"> Sign up </a>
+            <a class="navbar-item" (click)='authSection=true; loginMode=false'> Sign up </a>
           </div>
+        </ng-container >
+        <ng-template   #userProfile>
+          <div class="navbar-item">
+            <a class="navbar-item" > Account </a>
+          </div>
+          <div class="navbar-item">
+            <a class="navbar-item" (click)='userLogged=nulll; authSection=false'> LogOut </a>
+          </div>
+        </ng-template  >
         </div>
       </div>
   
@@ -42,3 +53,14 @@
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
   </a>
+
+
+    <div class="modal is-active" *ngIf='authSection && !userLogged'>
+    <div class="modal-background" (click)='authSection=false'></div>
+    <div class="modal-card brdr">
+      <section class="modal-card-body yellow">
+        <app-auth [isLoginMode]='loginMode'></app-auth>
+      </section>
+    </div>
+  </div>
+  
