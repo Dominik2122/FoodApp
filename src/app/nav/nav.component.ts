@@ -10,6 +10,7 @@ export class NavComponent implements OnInit {
   authSection:boolean
   userLogged:string = null
   loginMode:boolean=true
+  isDropdownActive = false
   constructor(private authService:AuthService) { }
 
   ngOnInit(): void {

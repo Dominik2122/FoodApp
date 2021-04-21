@@ -70,7 +70,6 @@ export class OrderComponent implements OnInit {
         return of([])
       }))
       .subscribe((res) => {
-        console.log(res)
         this.success = true     
     })
     setInterval(()=>{

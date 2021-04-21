@@ -39,7 +39,7 @@ export class AuthComponent {
         }
 
         authObs.subscribe(resData => {
-            console.log(resData)
+            
         }, errorMessage => {
            
             this.error = errorMessage

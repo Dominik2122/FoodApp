@@ -31,7 +31,6 @@ export class CheckoutComponent implements OnInit {
     for (let ingredient of ingredients){
       
       if (this.foodService.getIngredients(this.prevUrl)[ingredient].amount != 0) {
-        console.log(ingredient)
         this.ingredients.push(ingredient)
       }
     }
