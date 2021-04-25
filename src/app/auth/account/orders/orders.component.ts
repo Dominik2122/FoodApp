@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
+import { filter, map, pluck, take, tap } from 'rxjs/operators';
 import { Order } from 'src/app/food/order/order';
 import { AuthService } from '../../auth.service';
 
@@ -17,12 +17,10 @@ export class OrdersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get("https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/users-orders.json").pipe(
-      filter((res:any) => res.userId == this.authService.user.subscribe().unsubscribe() )
-    ).subscribe((orders:Order[]) => {
-      console.log(orders)
-      this.orders = [...orders]
-    }) 
+    this.authService.getUserOrderList().subscribe(user => {
+      this.orders = user.orders
+    })
   }
+    
 
 }

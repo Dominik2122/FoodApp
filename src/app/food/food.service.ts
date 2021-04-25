@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { exhaustMap, filter, tap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 import { Pizza } from './food-builder/pizza/pizza';
 import { Order } from './order/order';
 
@@ -31,7 +32,8 @@ export class FoodService {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
 
@@ -48,7 +50,7 @@ export class FoodService {
   }
 
   getIngredients(food: string) {
-    
+
     return this.ingredients[food]
   }
 
@@ -63,11 +65,23 @@ export class FoodService {
   }
 
 
-  sendOrderToServer(data:Order) {
+  sendOrderToServer(data: Order) {
+    this.addOrderToUser(data)
     return this.http.post(this.rootUrl + 'orders.json', data)
-      .pipe()
-      
   }
+
+
+  addOrderToUser(data: Order) {
+    let userOrderList = [];
+    this.authService.getUserOrderList().subscribe(list => {
+      userOrderList = list.orders
+      userOrderList.push(data)
+      this.authService.mergeDataToUserOrderList(userOrderList)
+    })
+    
+    
+  }
+
 
 
 

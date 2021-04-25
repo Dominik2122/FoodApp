@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AccountComponent } from './account/account.component';
 import { OrdersComponent } from './account/orders/orders.component';
 import { AddressComponent } from './account/address/address.component';
+import { AppRoutingModule } from '../app-routing.module';
+
 
 
 
@@ -19,7 +21,8 @@ import { AddressComponent } from './account/address/address.component';
   imports: [
     CommonModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   exports: [
     AuthComponent
