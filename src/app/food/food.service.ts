@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, tap } from 'rxjs/operators';
+import { exhaustMap, filter, tap } from 'rxjs/operators';
 import { Pizza } from './food-builder/pizza/pizza';
 import { Order } from './order/order';
 
@@ -65,6 +65,8 @@ export class FoodService {
 
   sendOrderToServer(data:Order) {
     return this.http.post(this.rootUrl + 'orders.json', data)
+      .pipe()
+      
   }
 
 

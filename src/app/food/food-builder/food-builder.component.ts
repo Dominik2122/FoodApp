@@ -34,15 +34,17 @@ export class FoodBuilderComponent implements OnInit {
       this.foodName = params.foodName
       this.foodService.prevFoodName = this.foodName
     })
-
+    let componentFactory;
     if (foods[this.foodName]){
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(foods[this.foodName])
-      const componentRef = this.foodComponent.viewContainerRef.createComponent(componentFactory)
+      componentFactory = this.componentFactoryResolver.resolveComponentFactory(foods[this.foodName])
+
     } else {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(NotFoundComponent)
-      const componentRef = this.foodComponent.viewContainerRef.createComponent(componentFactory) 
+      componentFactory = this.componentFactoryResolver.resolveComponentFactory(NotFoundComponent)
+      
     }
-    
+    const componentRef = this.foodComponent.viewContainerRef
+    componentRef.clear()
+    componentRef.createComponent(componentFactory)
     this.foodService.getUrl()
   }
 }

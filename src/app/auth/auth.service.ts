@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, exhaustMap, take, tap } from "rxjs/operators";
 import { BehaviorSubject, Subject, throwError } from 'rxjs'
 import { User } from "./user.model";
 import { AppComponent } from "../app.component";
@@ -21,7 +21,7 @@ export class AuthService {
 
     constructor(
         private http: HttpClient
-        ) { }
+    ) { }
 
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
@@ -31,14 +31,16 @@ export class AuthService {
                 password: password,
                 returnSecureToken: true
             }
-        ).pipe(tap(resData => {
-            this.handleAuthentication(
-                resData.email,
-                resData.localId,
-                resData.idToken,
-                +resData.expiresIn);
-                
-        }))
+        ).pipe(
+            tap(resData => {
+                this.handleAuthentication(
+                    resData.email,
+                    resData.localId,
+                    resData.idToken,
+                    +resData.expiresIn);
+
+            })
+        )
     }
 
 
@@ -55,7 +57,9 @@ export class AuthService {
                 resData.email,
                 resData.localId,
                 resData.idToken,
-                +resData.expiresIn)
+                +resData.expiresIn,
+            
+            )
         }))
     }
 
@@ -67,7 +71,19 @@ export class AuthService {
             userId,
             token,
             expirationDate);
+        this.createUserOrderList(userId);
         this.user.next(user);
+    }
+
+    private createUserOrderList(userId:string){
+        this.http.post('https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/users-orders.json', {
+            
+                userId: userId,
+                orders: ['']
+            
+        })
+            .pipe(take(1))
+            .subscribe()
     }
 
 
