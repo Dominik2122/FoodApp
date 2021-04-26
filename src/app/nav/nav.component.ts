@@ -19,6 +19,13 @@ export class NavComponent implements OnInit {
     })
   }
 
+  logout() {
+    this.userLogged = null; 
+    this.authSection = false;
+    this.authService.user.next(null) 
+    localStorage.setItem('user', null)
+  }
+
   
   
 }

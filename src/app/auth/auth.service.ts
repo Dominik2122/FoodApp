@@ -24,6 +24,7 @@ export class AuthService {
         private http: HttpClient
     ) { }
 
+
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
             "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDUZKV7WB4-scvSRilyxyNsEWK49nTlHH4",
@@ -74,6 +75,7 @@ export class AuthService {
             token,
             expirationDate);
         this.user.next(user);
+        localStorage.setItem('user', JSON.stringify(user))
     }
 
     private createUserOrderList(userId: string) {
