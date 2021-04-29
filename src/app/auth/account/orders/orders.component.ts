@@ -11,6 +11,7 @@ import { AuthService } from '../../auth.service';
 })
 export class OrdersComponent implements OnInit {
   orders: Order[] = []
+  currentIndex = 1
   constructor(
     private authService: AuthService,
     private http: HttpClient
@@ -20,6 +21,10 @@ export class OrdersComponent implements OnInit {
     this.authService.getUserOrderList().subscribe(user => {
       this.orders = user.orders
     })
+  }
+
+  onClick(){
+    console.log(this.orders)
   }
     
 

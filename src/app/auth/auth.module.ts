@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthComponent } from './auth.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountComponent } from './account/account.component';
 import { OrdersComponent } from './account/orders/orders.component';
 import { AddressComponent } from './account/address/address.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { FoodModule } from '../food/food.module';
 
 
 
@@ -22,7 +23,8 @@ import { AppRoutingModule } from '../app-routing.module';
     CommonModule,
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     AuthComponent

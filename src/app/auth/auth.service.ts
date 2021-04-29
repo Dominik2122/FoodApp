@@ -1,9 +1,8 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, exhaustMap, map, take, tap } from "rxjs/operators";
-import { BehaviorSubject, Subject, throwError } from 'rxjs'
+import { filter, map, take, tap } from "rxjs/operators";
+import { BehaviorSubject} from 'rxjs'
 import { User } from "./user.model";
-import { AppComponent } from "../app.component";
 import { Order } from "../food/order/order";
 
 export interface AuthResponseData {
@@ -98,26 +97,72 @@ export class AuthService {
             .pipe(
                 map(data => Object.values(data)),
                 map(arrayOfUsers => {
-                    
+
                     let currentUser = arrayOfUsers.filter(user => {
                         return user.userId == currentUserId
                     })
 
-                    return currentUser[currentUser.length-1] ;
+                    return currentUser[currentUser.length - 1];
                 })
             )
     }
 
-    mergeDataToUserOrderList(data:Order[]){
+    mergeDataToUserOrderList(data: Order[]) {
         let currentUserId: string;
         this.user.pipe(take(1)).subscribe(user => {
             currentUserId = user.id
         })
 
-        this.http.post(`https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/users-orders.json`, {orders: data, userId:currentUserId})
+        this.http.post(`https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/users-orders.json`, { orders: data, userId: currentUserId })
             .subscribe()
-        
+
     }
+
+
+    sendUserData(
+        addressDetails: {
+            user: string,
+            details: {
+                username: string,
+                address: string,
+                email: string,
+                phone: string
+            }
+        }
+    ) {
+        this.http.post(`https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/users-details.json`,
+        addressDetails)
+            .subscribe()
+    }
+
+    fetchUserData(){
+        
+        const userEmail = this.user.value.email
+        return this.http.get<{
+            [id:string] : {
+                user: string,
+                details: {
+                    username: string,
+                    address: string,
+                    email: string,
+                    phone: string
+                }}[]
+             
+        }>(`https://foodapp-8fffc-default-rtdb.europe-west1.firebasedatabase.app/users-details.json`)
+            .pipe(
+                map(x => Object.values(x)),
+                map(x => {
+                    let newObj = []
+                    for (let obj of x){
+                        if (obj['user'] == userEmail){
+                            newObj.push(obj)
+                        }
+                    }
+                    return newObj[newObj.length-1]
+                })
+            )
+    }
+
 }
 
 

@@ -1,0 +1,11 @@
+.active {
+    border: 10px solid black
+}
+
+.narrow {
+    width: 10%
+}
+
+.active {
+    width:100%
+}
