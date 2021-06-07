@@ -8,6 +8,10 @@ import { SymbolsComponent } from './home/symbols/symbols.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthModule } from './auth/auth.module';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 
 @NgModule({
@@ -22,7 +26,10 @@ import { FeedbackComponent } from './feedback/feedback.component';
     BrowserModule,
     AuthModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ name: 'test app', maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

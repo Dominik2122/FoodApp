@@ -14,7 +14,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SuccessComponent } from './order/success/success.component';
-
+import { StoreModule } from '@ngrx/store';
+import { pizzaReducer } from 'src/app/food/store/reducers/pizza.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 
 @NgModule({
@@ -34,7 +38,10 @@ import { SuccessComponent } from './order/success/success.component';
   imports: [
     CommonModule,
     FoodRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('food', pizzaReducer),
+    EffectsModule.forFeature([])
   ]
 })
-export class FoodModule { }
+export class FoodModule {
+}
