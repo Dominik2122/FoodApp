@@ -39,7 +39,7 @@ import { EffectsModule } from '@ngrx/effects';
     CommonModule,
     FoodRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('food', pizzaReducer),
+    StoreModule.forFeature('pizza', pizzaReducer),
     EffectsModule.forFeature([])
   ]
 })

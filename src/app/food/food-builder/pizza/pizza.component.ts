@@ -1,10 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FoodService} from '../../food.service';
-import {Pizza} from './pizza';
 import {Store} from '@ngrx/store';
-import {LoadPizza} from 'src/app/food/store/actions/pizza.actions';
 import {PizzaState} from '../../store/state/pizza.state';
-import {getPizzaIngredients} from '../../store/selectors/pizza.selectors';
+import {Ingredient} from './ingredients/ingredient.model';
+import {getPizzaIngredients} from '../../store/command-dispatchers/pizza.commandDispatchers';
 
 @Component({
   selector: 'app-pizza',
@@ -12,36 +11,25 @@ import {getPizzaIngredients} from '../../store/selectors/pizza.selectors';
   styleUrls: ['./pizza.component.css']
 })
 export class PizzaComponent implements OnInit {
-  ingredients: Pizza;
+  ingredients: Ingredient[];
   price = this.foodService.currentPrice;
 
   constructor(
     private foodService: FoodService,
-    private store: Store<PizzaState>
   ) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadPizza());
-
-    console.log(getPizzaIngredients(this.store));
-
-
-    if (this.foodService.currentPrice === 0) {
-      this.foodService.currentPrice = 5;
-      this.price = 5;
-    }
+    this.subscribeForPizzaIngredients();
     this.ingredients = this.foodService.getIngredients('pizza');
-    this.foodService.ingredientsUpdated.subscribe((data: Pizza) => {
-      this.ingredients = data;
-    });
-    this.foodService.price.subscribe((price) => {
-      this.price = price;
-    });
 
+  };
+
+
+  subscribeForPizzaIngredients(): void {
+    getPizzaIngredients()
+      .subscribe((ingredients: Ingredient[]) => {
+      this.ingredients = ingredients;
+    });
   }
-
-
-
-
-}
+};
