@@ -1,25 +1,8 @@
-import { Pizza } from 'src/app/food/food-builder/pizza/pizza';
-import { Action, createFeatureSelector } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { FOOD_ACTIONS } from 'src/app/food/store/actions/pizza.actions';
+import {initialPizzaState, PizzaState} from '../state/pizza.state';
 
-
-export interface State {
-  food: FoodState;
-}
-
-export interface FoodState {
-  food: Pizza;
-  price: number;
-  ordered: boolean;
-}
-
-const initalState: FoodState = {
-  food: null,
-  price: null,
-  ordered: null
-};
-
-export const pizzaReducer = (state: FoodState, action: Action) => {
+export const pizzaReducer = (state: PizzaState = initialPizzaState, action: Action) => {
   switch (action.type) {
     case FOOD_ACTIONS.LOAD_PIZZA:
       return {
@@ -29,5 +12,5 @@ export const pizzaReducer = (state: FoodState, action: Action) => {
       };
   }
 
-  return initalState;
+  return state;
 };

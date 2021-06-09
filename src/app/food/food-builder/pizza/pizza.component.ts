@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FoodService } from '../../food.service';
-import { Pizza } from './pizza';
-import { Store } from '@ngrx/store';
-import { FoodState } from 'src/app/food/store/reducers/pizza.reducer';
-import { LoadPizza } from 'src/app/food/store/actions/pizza.actions';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FoodService} from '../../food.service';
+import {Pizza} from './pizza';
+import {Store} from '@ngrx/store';
+import {LoadPizza} from 'src/app/food/store/actions/pizza.actions';
+import {PizzaState} from '../../store/state/pizza.state';
+import {getPizzaIngredients} from '../../store/selectors/pizza.selectors';
 
 @Component({
   selector: 'app-pizza',
@@ -16,13 +17,14 @@ export class PizzaComponent implements OnInit {
 
   constructor(
     private foodService: FoodService,
-    private store: Store<FoodState>
+    private store: Store<PizzaState>
   ) {
   }
 
-  ngOnInit() {
-    console.log('hi')
+  ngOnInit(): void {
     this.store.dispatch(new LoadPizza());
+
+    console.log(getPizzaIngredients(this.store));
 
 
     if (this.foodService.currentPrice === 0) {
@@ -39,9 +41,7 @@ export class PizzaComponent implements OnInit {
 
   }
 
-  ngOnDestroy() {
-    this.foodService.currentPrice = this.price;
-  }
+
 
 
 }

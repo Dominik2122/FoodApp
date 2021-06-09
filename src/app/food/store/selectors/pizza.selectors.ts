@@ -1,17 +1,27 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { FoodState } from 'src/app/food/store/reducers/pizza.reducer';
+import {PizzaState} from '../state/pizza.state';
 
 
-const getPizzaFeatureState = createFeatureSelector<FoodState>('food');
+const getPizzaFeatureState = createFeatureSelector<PizzaState>('pizza');
 
-export const getFood = createSelector(
+export const getPizzaName = createSelector(
   getPizzaFeatureState,
   state => {
-    return state.food;
+    return state.name;
   }
 );
 
-export const getPrice = createSelector(
+export const getPizzaPrice = createSelector(
   getPizzaFeatureState,
   state => state.price
+);
+
+export const getPizzaId = createSelector(
+  getPizzaFeatureState,
+  state => state.id
+);
+
+export const getPizzaIngredients = createSelector(
+  getPizzaFeatureState,
+  state => state.ingredients
 );
