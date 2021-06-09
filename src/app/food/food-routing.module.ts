@@ -5,15 +5,16 @@ import { FoodBuilderComponent } from './food-builder/food-builder.component';
 import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
-  {path:'checkout', component:CheckoutComponent},
-  {path:'order', component:OrderComponent},
-  {path:':foodName', component:FoodBuilderComponent},
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'order', component: OrderComponent },
+  { path: ':foodName', component: FoodBuilderComponent }
 
-  
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FoodRoutingModule { }
+export class FoodRoutingModule {
+}

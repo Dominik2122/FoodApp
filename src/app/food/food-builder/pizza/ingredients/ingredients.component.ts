@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Pizza} from '../pizza';
+import { Ingredient } from 'src/app/food/food-builder/pizza/ingredients/ingredient.model';
 
 @Component({
   selector: 'app-ingredients',
@@ -7,7 +7,7 @@ import {Pizza} from '../pizza';
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-  @Input() ingredients: Pizza;
+  @Input() ingredients: Ingredient[];
 
   constructor() {
   }

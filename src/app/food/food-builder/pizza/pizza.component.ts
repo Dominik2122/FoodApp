@@ -1,9 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FoodService} from '../../food.service';
-import {Store} from '@ngrx/store';
-import {PizzaState} from '../../store/state/pizza.state';
-import {Ingredient} from './ingredients/ingredient.model';
-import {getPizzaIngredients} from '../../store/command-dispatchers/pizza.commandDispatchers';
+import { Component, OnInit } from '@angular/core';
+import { FoodService } from '../../food.service';
+import { Ingredient } from './ingredients/ingredient.model';
+import { PizzaCommandDispatcher } from 'src/app/food/store/command-dispatchers/pizza.commandDispatchers';
 
 @Component({
   selector: 'app-pizza',
@@ -12,24 +10,25 @@ import {getPizzaIngredients} from '../../store/command-dispatchers/pizza.command
 })
 export class PizzaComponent implements OnInit {
   ingredients: Ingredient[];
-  price = this.foodService.currentPrice;
+  currentIngredients: Ingredient[];
+  price: number;
 
   constructor(
     private foodService: FoodService,
+    private pizzaCommandDispatchers: PizzaCommandDispatcher
   ) {
   }
 
   ngOnInit(): void {
     this.subscribeForPizzaIngredients();
-    this.ingredients = this.foodService.getIngredients('pizza');
 
   };
 
 
   subscribeForPizzaIngredients(): void {
-    getPizzaIngredients()
-      .subscribe((ingredients: Ingredient[]) => {
-      this.ingredients = ingredients;
-    });
+    this.pizzaCommandDispatchers.getPizzaIngredients()
+        .subscribe((ingredients: Ingredient[]) => {
+          this.currentIngredients = ingredients;
+        });
   }
 };

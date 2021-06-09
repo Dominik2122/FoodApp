@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodDirective } from '../food.directive';
 import { SushiComponent } from './sushi/sushi.component';
@@ -8,10 +8,9 @@ import { FoodService } from '../food.service';
 
 
 const foods = {
-  'pizza': PizzaComponent,
-  'sushi': SushiComponent
-}
-
+  pizza: PizzaComponent,
+  sushi: SushiComponent
+};
 
 
 @Component({
@@ -21,30 +20,40 @@ const foods = {
 })
 export class FoodBuilderComponent implements OnInit {
   foodName: string;
-  @ViewChild(FoodDirective, { static: true }) foodComponent: FoodDirective
+  @ViewChild(FoodDirective, { static: true }) foodComponent: FoodDirective;
+  currentComponent: ComponentFactory<any>;
+
   constructor(
     private route: ActivatedRoute,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private foodService:FoodService
-
-    ) { }
+    private foodService: FoodService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => { 
-      this.foodName = params.foodName
-      this.foodService.prevFoodName = this.foodName
-    })
-    let componentFactory;
-    if (foods[this.foodName]){
-      componentFactory = this.componentFactoryResolver.resolveComponentFactory(foods[this.foodName])
+    this.subscribeForRouteParams();
+    this.renderCurrentComponent();
+  }
 
+  private renderCurrentComponent(): void {
+    if (foods[this.foodName]) {
+      this.currentComponent = this.componentFactoryResolver.resolveComponentFactory(foods[this.foodName]);
     } else {
-      componentFactory = this.componentFactoryResolver.resolveComponentFactory(NotFoundComponent)
-      
+      this.currentComponent = this.componentFactoryResolver.resolveComponentFactory(NotFoundComponent);
     }
-    const componentRef = this.foodComponent.viewContainerRef
-    componentRef.clear()
-    componentRef.createComponent(componentFactory)
-    this.foodService.getUrl()
+    this.currentComponentFactory(this.currentComponent);
+  }
+
+  private currentComponentFactory(component: ComponentFactory<any>): void {
+    const componentRef = this.foodComponent.viewContainerRef;
+    componentRef.clear();
+    componentRef.createComponent(component);
+  }
+
+  private subscribeForRouteParams(): void {
+    this.route.params.subscribe((params) => {
+      this.foodName = params.foodName;
+      this.foodService.prevFoodName = this.foodName;
+    });
   }
 }

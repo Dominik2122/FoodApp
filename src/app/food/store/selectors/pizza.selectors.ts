@@ -21,7 +21,7 @@ export const getPizzaId = createSelector(
   state => state.id
 );
 
-export const getPizzaIngredients = createSelector(
+export const getStateIngredients = createSelector(
   getPizzaFeatureState,
   state => state.ingredients
 );
