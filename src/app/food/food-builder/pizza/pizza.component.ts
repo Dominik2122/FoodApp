@@ -21,7 +21,8 @@ export class PizzaComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeForPizzaIngredients();
-
+    this.pizzaCommandDispatchers.getAllAvailablePizzaIngredients();
+    console.log('after dispatching an action');
   };
 
 

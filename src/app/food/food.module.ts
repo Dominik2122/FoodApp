@@ -16,9 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SuccessComponent } from './order/success/success.component';
 import { StoreModule } from '@ngrx/store';
 import { pizzaReducer } from 'src/app/food/store/reducers/pizza.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import {FoodEffects} from './store/effects/pizza.effects';
 
 
 @NgModule({
@@ -40,7 +39,7 @@ import { EffectsModule } from '@ngrx/effects';
     FoodRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature('pizza', pizzaReducer),
-    EffectsModule.forFeature([])
+    EffectsModule.forFeature([FoodEffects])
   ]
 })
 export class FoodModule {
