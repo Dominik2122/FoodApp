@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "foodapp-8fffc": {
+      "hosting": {
+        "FoodApp": [
+          "foodapp-8fffc"
+        ]
+      }
+    }
+  }
+}

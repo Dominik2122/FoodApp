@@ -1,7 +1,8 @@
 import { Component, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { AuthService } from './auth/auth.service';
-import { User } from './auth/user.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Ingredient } from 'src/app/food/food-builder/pizza/ingredients/ingredient.model';
+import { ingredientsArray } from 'src/app/food/food-builder/pizza/store/pizzaIngredients.mock';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,11 @@ import { User } from './auth/user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  constructor(private authService:AuthService){}
-  ngOnInit() {
 
+  private userPostsCollection: AngularFirestoreCollection<Ingredient>;
+  ingredients: Observable<Ingredient>;
 
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (user) {
-      this.authService.user.next(user)
-    }
+  constructor(private angularFirestore: AngularFirestore) {
   }
 
-  
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FoodService } from 'src/app/food/food.service';
 
 @Component({
@@ -7,32 +7,15 @@ import { FoodService } from 'src/app/food/food.service';
   styleUrls: ['./controler.component.css']
 })
 export class ControlerComponent {
-  @Input() ingredientName:string
-  @Input() active = false
-  @Input() ingredientPrice:number
-  @Output() ingredientChanged = new EventEmitter<string>();
-  @Output() showModal = new EventEmitter<boolean>();
-
-  constructor(private foodService:FoodService) { }
+  @Input() ingredientName: string;
+  @Input() ingredientPrice: number;
+  @Input() active: boolean;
 
 
-  ingredientOnClick(name){
-    if (this.ingredientName == 'cheese' && this.active == true){
-      this.showModal.emit()
-    } else{ 
-      this.ingredientChanged.emit(name)
-      if (this.active == true){
-        this.foodService.priceUpdate(-this.ingredientPrice)
-      } else {
-        this.foodService.priceUpdate(this.ingredientPrice)
-      }
-      this.active = !this.active
-    }
-  }
-
-  onModalClick(name) {
-    this.ingredientChanged.emit(name)
-    this.active = !this.active
+  constructor() {
   }
 
 }
+
+
+

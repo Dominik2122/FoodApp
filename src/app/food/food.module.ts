@@ -15,9 +15,9 @@ import { OrderComponent } from './order/order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SuccessComponent } from './order/success/success.component';
 import { StoreModule } from '@ngrx/store';
-import { pizzaReducer } from 'src/app/food/store/reducers/pizza.reducer';
+import { pizzaReducer } from 'src/app/food/food-builder/pizza/store/pizza.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import {FoodEffects} from './store/effects/pizza.effects';
+import {FoodEffects} from 'src/app/food/food-builder/pizza/store/pizza.effects';
 
 
 @NgModule({

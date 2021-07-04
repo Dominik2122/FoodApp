@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<app-controls></app-controls>
+<app-controls [availableIngredients]="ingredients"></app-controls>
 <div class="price">
-    <h1>Cost: {{price | number:'1.2-2'}}$</h1>
+  <h1>Cost: {{price | async | number:'1.2-2'}}$</h1>
 </div>

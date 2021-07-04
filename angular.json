@@ -24,9 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-
-
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -118,6 +116,10 @@
               "devServerTarget": "FoodApp:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
