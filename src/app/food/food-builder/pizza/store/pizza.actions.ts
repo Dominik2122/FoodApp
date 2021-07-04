@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {Ingredient} from '../../food-builder/pizza/ingredients/ingredient.model';
+import {Ingredient} from 'src/app/food/food-builder/pizza/ingredients/ingredient.model';
 
 const PREFIX = '[FOOD]';
 
@@ -26,7 +26,7 @@ export class LoadAvailablePizzaIngredients implements Action {
 export class LoadAvailablePizzaIngredientsSuccess implements Action {
   type = FOOD_ACTIONS.LOAD_AVAILABLE_PIZZA_INGREDIENTS_SUCCESS;
 
-  constructor(payload: Ingredient[]) {
+  constructor(public payload: Ingredient[]) {
   }
 }
 
